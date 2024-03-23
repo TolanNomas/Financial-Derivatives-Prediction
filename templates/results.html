@@ -151,10 +151,17 @@
     <section id="results">
         <h2>Results</h2>
         <div class="results-section">
-            <p>Predicted Value: {{ prediction }}</p>
 
-            <p class="disclaimer">Disclaimer: This information is for demonstration purposes only and should not be used for actual financial decisions.</p>
-        </div>
+
+    <div class="result-values">
+        <h3>Prediction:</h3>
+        <p>Predicted Price: {{ prediction }}</p>
+    </div>
+
+
+    <p class="disclaimer">Disclaimer: This information is for demonstration purposes only and should not be used for actual financial decisions.</p>
+</div>
+
     </section>
     <canvas id="price-chart"></canvas>
     <footer>

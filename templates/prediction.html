@@ -137,30 +137,23 @@
     <section id="pre-prediction">
         <h2>Prediction Interface</h2>
         <div class="prediction-form">
-  	    <label for="stocks">Select Stocks:</label>
-            <select id="stocks">
-                <option value="stock1">Google</option>
-                <option value="stock2">Apple</option>
-                <option value="stock3">Microsoft</option>
-            </select>
-            <label for="timeline">Select Timeline:</label>
-            <select id="timeline">
-                <option value="1-month">1 Month</option>
-                <option value="3-months">3 Months</option>
-                <option value="6-months">6 Months</option>
-            </select>
-         
-            <div class="price-display">
-                <p id="current-price">Current Price: $XXXX</p>
-                <p>Predicted Price will be shown on Results page</p>
-            </div>
-		
-<form action="/predict" method="post">
-    <input type="number" name="data" placeholder="Enter data here">
-    <button type="submit">Predict</button>
+<form action="{{ url_for('predict') }}" method="post">
+    <label for="stock">Choose a stock:</label>
+    <select name="stock" id="stock">
+        <option value="wheat">Wheat</option>
+        <option value="oil">Oil</option>
+        <option value="gold">Gold</option>
+    </select>
+    <label for="model_type">Choose a model type:</label>
+    <select name="model_type" id="model_type">
+        <option value="LSTM">LSTM</option>
+        <option value="ARIMA">ARIMA</option>
+        <option value="RFC">RFC</option>
+    </select>
+    <input type="submit" value="Predict">
 </form>
-            <button class="btn-go-to-results">Go To Results</button>
-        </div>
+
+
     </section>
     <div class="results-section">
         <p class="disclaimer">Disclaimer: This information is for demonstration purposes only and should not be used for actual financial decisions.</p>
