@@ -80,16 +80,55 @@
             color: #333;
         }
 
-        .results-section {
-            border: 2px solid #3498db; /* Box around the results section */
+  .results-section {
+        border: 2px solid #3498db; /* Box around the results section */
             border-radius: 10px;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            max-width: 500px; /* Limit the width of the results box */
+            max-width: 1200px; /* Limit the width of the results box */
             margin: 0 auto; /* Center the results box horizontally */
             text-align: center; /* Center the content horizontally within the box */
-        }
+  }
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* Three columns of equal width */
+    gap: 20px; /* Gap between grid items */
+    /* ... other styles ... */
+}
+
+  .model-info-box {
+      border: 2px solid #3498db;
+      border-radius: 10px;
+      padding: 10px;
+      margin-right: 0;
+      margin: 0 auto;
+      background-color: #fff;
+      box-shadow: 0 0 20px rgba(0, 0,0, 0.1);
+width: 60%; /* Make the box fill the column */
+}
+
+  .model-image-box {
+
+width: 100%; /* Make the box fill the column */
+}
+
+.model-image-box img {
+max-width: 100%; /* Make the image responsive and ensure it fits within the box /
+ / Maintain the image aspect ratio */
+}
+
+/* Right align the RFC model box */
+.rfc-info {
+    margin-right: 0;
+    padding-right: 20px; /* Adjust padding to create some space from the edge */
+}
+
+
+
+	.model-box h2 {
+            margin-top: 0;
+	}
 
         .yes-label {
             color: green;
@@ -152,11 +191,41 @@
         <h2>Results</h2>
         <div class="results-section">
 
+<div class="result-values">
+	<h1>Model Predictions for Next Day Price</h1>
+    <div class="grid-container">
 
-    <div class="result-values">
-        <h3>Prediction:</h3>
-        <p>Predicted Price: {{ prediction }}</p>
-    </div>
+        <!-- RFC Model Info -->
+        <div class="model-info-box">
+	<div class="rfc-info">
+            <h3>RFC Model</h3>
+            <p>Prediction: price will go {{ RFC_prediction }}</p>
+        </div>
+	</div>
+        <!-- LSTM Model Box -->
+        <div class="model-info-box">
+            <h3>LSTM Model</h3>
+            <p>Prediction Price: {{ "%.2f"|format(LSTM_prediction) }}</p>
+            <p>RMSE: {{ "%.2f"|format(LSTM_rmse) }}</p>
+            <p>MAE: {{ "%.2f"|format(LSTM_mae) }}</p>
+            <p>MAPE: {{ "%.2f"|format(LSTM_mape) }}%</p>
+	<div class="model-image-box">
+            <img src="{{ url_for('static', filename='images/LSTM_' ~ stock ~ '_PNG.png') }}" alt="LSTM {{ stock }} Prediction">
+        </div>
+</div>
+        <!-- ARIMA Model Box -->
+    	<div class="model-info-box">
+            <h3>ARIMA Model</h3>
+		<p>Prediction Price:</strong> {{ "%.2f"|format(ARIMA_prediction) }}</p>
+		<p>ARIMA RMSE:</strong> {{ "%.2f"|format(ARIMA_rmse) }}</p>
+		<p>ARIMA Best Order:</strong> {{ ARIMA_best_order }}</p>
+        <div class="model-image-box">
+            <img src="{{ url_for('static', filename='images/ARIMA_' ~ stock ~ '_PNG.png') }}" alt="ARIMA {{ stock }} Prediction">
+	</div>
+</div>
+
+     </div>
+</div>
 
 
     <p class="disclaimer">Disclaimer: This information is for demonstration purposes only and should not be used for actual financial decisions.</p>
@@ -164,9 +233,7 @@
 
     </section>
     <canvas id="price-chart"></canvas>
-    <footer>
-        <p>Admin Controls | Underlying Model/DB</p>
-    </footer>
+
 
     <script>
         
