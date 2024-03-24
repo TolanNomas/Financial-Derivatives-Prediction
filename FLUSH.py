@@ -17,9 +17,23 @@ def home():
 def prediction_interface():
     return render_template('prediction.html')
 
-def load_next_day_price(model_type, stock):
+def ARIMA_load_model_data(stock):
+    price_path = f'C:/Users/jackc/Documents/FYP_ML_Predict/models/ARIMA_{stock}.pkl'
+    with open(price_path, 'rb') as file:
+        data_loaded = pickle.load(file)
+    return data_loaded
+
+
+def LSTM_load_model_data(stock):
+    price_path = f'C:/Users/jackc/Documents/FYP_ML_Predict/models/LSTM_{stock}.pkl'
+    with open(price_path, 'rb') as file:
+        data_loaded = pickle.load(file)
+    return data_loaded
+
+
+def RFC_load_next_day_price(stock):
     
-    price_path = f'C:/Users/jackc/Documents/FYP_ML_Predict/models/{model_type}_{stock}.pkl'
+    price_path = f'C:/Users/jackc/Documents/FYP_ML_Predict/models/RFC_{stock}.pkl'
     with open(price_path, 'rb') as file:
         next_day_price = pickle.load(file)
     return next_day_price
@@ -27,16 +41,28 @@ def load_next_day_price(model_type, stock):
 @app.route('/predict', methods=['POST'])
 def predict():
     stock = request.form.get('stock')
-    model_type = request.form.get('model_type')
 
-    # Load the next day price for the selected stock
-    next_day_price = load_next_day_price(model_type, stock)
-    # Directly pass the next_day_price to the results page
-    return render_template('results.html', prediction=next_day_price)
+    ARIMA_data = ARIMA_load_model_data(stock)  
+    LSTM_data = LSTM_load_model_data(stock)  
+    RFC_next_day_price = RFC_load_next_day_price(stock)  
 
-@app.route('/results/<prediction>')
-def results(prediction):
-    return render_template('results.html', prediction=prediction)
+    # Pass predictions and model details to the results page
+    return render_template('results.html',
+			   stock=stock,
+                           ARIMA_prediction=ARIMA_data['next_day_price'], 
+                           ARIMA_rmse=ARIMA_data['rmse'], 
+                           ARIMA_best_order=ARIMA_data['best_order'],
+                           LSTM_prediction=LSTM_data['next_day_price'], 
+                           LSTM_rmse=LSTM_data['rmse'], 
+                           LSTM_mae=LSTM_data['mae'], 
+                           LSTM_mape=LSTM_data['mape'],
+                           RFC_prediction=RFC_next_day_price)
+
+
+@app.route('/results')
+def results():
+    return render_template('results.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
