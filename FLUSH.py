@@ -9,11 +9,8 @@ import pickle
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return render_template('Homepage.html')
 
-@app.route('/prediction')
+@app.route('/')
 def prediction_interface():
     return render_template('prediction.html')
 
