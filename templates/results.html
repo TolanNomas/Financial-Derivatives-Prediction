@@ -205,6 +205,7 @@ max-width: 100%; /* Make the image responsive and ensure it fits within the box 
         <!-- LSTM Model Box -->
         <div class="model-info-box">
             <h3>LSTM Model</h3>
+	    <p>Current closing Price:</strong> {{ "%.2f"|format(LSTM_current_price) }} for {{ LSTM_yesterday }}</p>
             <p>Prediction Price: {{ "%.2f"|format(LSTM_prediction) }}</p>
             <p>RMSE: {{ "%.2f"|format(LSTM_rmse) }}</p>
             <p>MAE: {{ "%.2f"|format(LSTM_mae) }}</p>
@@ -216,8 +217,11 @@ max-width: 100%; /* Make the image responsive and ensure it fits within the box 
         <!-- ARIMA Model Box -->
     	<div class="model-info-box">
             <h3>ARIMA Model</h3>
+	        <p>Current closing Price:</strong> {{ "%.2f"|format(ARIMA_current_price) }} for {{ ARIMA_yesterday }}</p>
 		<p>Prediction Price:</strong> {{ "%.2f"|format(ARIMA_prediction) }}</p>
-		<p>ARIMA RMSE:</strong> {{ "%.2f"|format(ARIMA_rmse) }}</p>
+		<p>RMSE:</strong> {{ "%.2f"|format(ARIMA_rmse) }}</p>
+		<p>MAE:</strong> {{ "%.2f"|format(ARIMA_mae) }}</p>
+		<p>MAPE:</strong> {{ "%.2f"|format(ARIMA_mape) }}</p>
 		<p>ARIMA Best Order:</strong> {{ ARIMA_best_order }}</p>
         <div class="model-image-box">
             <img src="{{ url_for('static', filename='images/ARIMA_' ~ stock ~ '_PNG.png') }}" alt="ARIMA {{ stock }} Prediction">
