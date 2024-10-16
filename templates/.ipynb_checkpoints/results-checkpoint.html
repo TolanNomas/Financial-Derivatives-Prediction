@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results - DeepPricer</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        nav {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #3498db;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #3498db;
+            padding: 20px 0;
+            text-align: center;
+            color: #fff;
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin: 5px 0;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .home-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Main content styles */
+        section {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+  .results-section {
+        border: 2px solid #3498db; /* Box around the results section */
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 1200px; /* Limit the width of the results box */
+            margin: 0 auto; /* Center the results box horizontally */
+            text-align: center; /* Center the content horizontally within the box */
+  }
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* Three columns of equal width */
+    gap: 20px; /* Gap between grid items */
+    /* ... other styles ... */
+}
+
+  .model-info-box {
+      border: 2px solid #3498db;
+      border-radius: 10px;
+      padding: 10px;
+      margin-right: 0;
+      margin: 0 auto;
+      background-color: #fff;
+      box-shadow: 0 0 20px rgba(0, 0,0, 0.1);
+width: 60%; /* Make the box fill the column */
+}
+
+  .model-image-box {
+
+width: 100%; /* Make the box fill the column */
+}
+
+.model-image-box img {
+max-width: 100%; /* Make the image responsive and ensure it fits within the box /
+ / Maintain the image aspect ratio */
+}
+
+/* Right align the RFC model box */
+.rfc-info {
+    margin-right: 0;
+    padding-right: 20px; /* Adjust padding to create some space from the edge */
+}
+
+
+
+	.model-box h2 {
+            margin-top: 0;
+	}
+
+        .yes-label {
+            color: green;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .result-values {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center the content vertically within the box */
+            margin-bottom: 15px;
+        }
+
+        .result-values p {
+            margin: 5px 0;
+        }
+
+        .error {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .disclaimer {
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #34495e;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><em>InsightTrader</em></h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/">Prediction Interface</a></li>
+        </ul>
+    </nav>
+    <section id="results">
+        <h2>Results</h2>
+        <div class="results-section">
+
+<div class="result-values">
+	<h1>Model Predictions for Next Day Price</h1>
+    <div class="grid-container">
+
+        <!-- RFC Model Info -->
+        <div class="model-info-box">
+	<div class="rfc-info">
+            <h3>RFC Model</h3>
+            <p>Prediction: price will go {{ RFC_prediction }}</p>
+        </div>
+	</div>
+        <!-- LSTM Model Box -->
+        <div class="model-info-box">
+            <h3>LSTM Model</h3>
+	    <p>Current closing Price:</strong> {{ "%.2f"|format(LSTM_current_price) }} for {{ LSTM_yesterday }}</p>
+            <p>Prediction Price: {{ "%.2f"|format(LSTM_prediction) }}</p>
+            <p>RMSE: {{ "%.2f"|format(LSTM_rmse) }}</p>
+            <p>MAE: {{ "%.2f"|format(LSTM_mae) }}</p>
+            <p>MAPE: {{ "%.2f"|format(LSTM_mape) }}%</p>
+	<div class="model-image-box">
+            <img src="{{ url_for('static', filename='images/LSTM_' ~ stock ~ '_PNG.png') }}" alt="LSTM {{ stock }} Prediction">
+        </div>
+</div>
+        <!-- ARIMA Model Box -->
+    	<div class="model-info-box">
+            <h3>ARIMA Model</h3>
+	        <p>Current closing Price:</strong> {{ "%.2f"|format(ARIMA_current_price) }} for {{ ARIMA_yesterday }}</p>
+		<p>Prediction Price:</strong> {{ "%.2f"|format(ARIMA_prediction) }}</p>
+		<p>RMSE:</strong> {{ "%.2f"|format(ARIMA_rmse) }}</p>
+		<p>MAE:</strong> {{ "%.2f"|format(ARIMA_mae) }}</p>
+		<p>MAPE:</strong> {{ "%.2f"|format(ARIMA_mape) }}</p>
+		<p>ARIMA Best Order:</strong> {{ ARIMA_best_order }}</p>
+        <div class="model-image-box">
+            <img src="{{ url_for('static', filename='images/ARIMA_' ~ stock ~ '_PNG.png') }}" alt="ARIMA {{ stock }} Prediction">
+	</div>
+</div>
+
+     </div>
+</div>
+
+
+    <p class="disclaimer">Disclaimer: This information is for demonstration purposes only and should not be used for actual financial decisions.</p>
+</div>
+
+    </section>
+    <canvas id="price-chart"></canvas>
+
+
+    <script>
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Past Predictions - DeepPricer</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: #3498db;
+            padding: 20px 0;
+            text-align: center;
+            color: #fff;
+        }
+        
+        header h1 {
+            font-size: 36px;
+            margin: 5px 0;
+            font-style: italic;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        /* Navigation styles */
+        nav {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            text-align: center;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        nav ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+        
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        /* Main content styles */
+        section {
+            padding: 50px 20px;
+            text-align: center;
+        }
+        
+        section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        section p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* Past Predictions styles */
+        .past-predictions {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .prediction-item {
+            background-color: #fff; /* White background */
+            color: #333; /* Text color */
+            border: 2px solid #3498db; /* Border line color */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 0 auto 20px;
+            max-width: 600px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .prediction-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #3498db; /* Title color */
+        }
+
+        .prediction-item p {
+            font-size: 18px;
+        }
+        
+        /* Footer styles */
+        footer {
+            background-color: #34495e;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><em>InsightTrader</em></h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Prediction Interface</a></li>
+        </ul>
+    </nav>
+    <section id="past-predictions">
+        <h2>Past Predictions</h2>
+        <div class="past-predictions">
+            <div class="prediction-item">
+                <h3>Prediction Date: January 15, 2024</h3>
+                <p>Stock: Google</p>
+                <p>Timeline: 3 Months</p>
+                <p>Predicted Price: $150.00</p>
+                <p>Actual Price: $160.00</p>
+            </div>
+            <div class="prediction-item">
+                <h3>Prediction Date: January 10, 2024</h3>
+                <p>Stock: Apple</p>
+                <p>Timeline: 1 Month</p>
+                <p>Predicted Price: $140.00</p>
+                <p>Actual Price: $145.00</p>
+            </div>
+            <!-- Add more prediction items as needed -->
+        </div>
+    </section>
+    <footer>
+        <p>Admin Controls | Underlying Model/DB</p>
+    </footer>
+</body>
+</html>

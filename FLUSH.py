@@ -15,22 +15,25 @@ def prediction_interface():
     return render_template('prediction.html')
 
 def ARIMA_load_model_data(stock):
-    price_path = f'C:/Users/jackc/Documents/FYP_ML_Predict/models/ARIMA_{stock}.pkl'
+    #price_path = f'C:/Users/jackc/Documents/FYP_ML_Predict/models/ARIMA_{stock}.pkl'
+    price_path = f'C:/Users/15105006/Desktop/ML_Project/models/ARIMA_{stock}.pkl'
     with open(price_path, 'rb') as file:
         data_loaded = pickle.load(file)
     return data_loaded
 
 
 def LSTM_load_model_data(stock):
-    price_path = f'C:/Users/jackc/Documents/FYP_ML_Predict/models/LSTM_{stock}.pkl'
+    #price_path = f'C:/Users/jackc/Documents/FYP_ML_Predict/models/LSTM_{stock}.pkl'
+    price_path = f'C:/Users/15105006/Desktop/ML_Project/models/LSTM_{stock}.pkl'
     with open(price_path, 'rb') as file:
         data_loaded = pickle.load(file)
     return data_loaded
 
 
 def RFC_load_next_day_price(stock):
-    
-    price_path = f'C:/Users/jackc/Documents/FYP_ML_Predict/models/RFC_{stock}.pkl'
+
+    #price_path = f'C:/Users/jackc/Documents/FYP_ML_Predict/models/RFC_{stock}.pkl'
+    price_path = f'C:/Users/15105006/Desktop/ML_Project/models/RFC_{stock}.pkl'
     with open(price_path, 'rb') as file:
         next_day_price = pickle.load(file)
     return next_day_price

@@ -219,11 +219,33 @@ max-width: 100%; /* Make the image responsive and ensure it fits within the box 
 		<p>Prediction Price:</strong> {{ "%.2f"|format(ARIMA_prediction) }}</p>
 		<p>RMSE:</strong> {{ "%.2f"|format(ARIMA_rmse) }}</p>
 		<p>MAE:</strong> {{ "%.2f"|format(ARIMA_mae) }}</p>
-		<p>MAPE:</strong> {{ "%.2f"|format(ARIMA_mape) }}</p>
+		<p>MAPE:</strong> {{ "%.2f%%"|format(ARIMA_mape) }}</p>
 		<p>ARIMA Best Order:</strong> {{ ARIMA_best_order }}</p>
         <div class="model-image-box">
             <img src="{{ url_for('static', filename='images/ARIMA_' ~ stock ~ '_PNG.png') }}" alt="ARIMA {{ stock }} Prediction">
 	</div>
+</div>
+	<div class="model-info-box">
+	<h3> Understanding Your Prediction Metrics </h3>
+	<p>
+When you receive predictions from our models, you're also provided with three key metrics that help you understand the accuracy and reliability of these predictions: RMSE (Root Mean Square Error), MAE (Mean Absolute Error), and MAPE (Mean Absolute Percentage Error). Here's a brief guide to what these metrics mean and how you can use them to gauge the performance of the predictions.</p>
+
+<b>RMSE (Root Mean Square Error)</b><p></p>
+<b>What It Measures:</b>
+<p> RMSE calculates the square root of the average squared differences between the predicted and actual values. In simpler terms, it shows how far, on average, the predictions are from the actual prices.</p>
+<b>How to Interpret:</b> 
+<p>A lower RMSE value means the predictions are closer to the actual results, indicating higher accuracy. However, because RMSE is in the same units as the predicted commodity prices, its value needs to be considered in the context of the price scale of the commodity.</p>
+
+<b>MAE (Mean Absolute Error)</b><p></p>
+<b>What It Measures:</b>
+<p> MAE represents the average of the absolute differences between the predicted and actual values. It tells us how big of an error we can expect, on average, from the predictions.</p>
+<b>How to Interpret:</b>
+<p> Similar to RMSE, a lower MAE value indicates better predictive accuracy. Unlike RMSE, MAE gives a linear representation of errors, making it easier to interpret directly as the average error in the same unit of measurement as the commodity price.</p>
+<b>MAPE (Mean Absolute Percentage Error)</b><p></p>
+<b>What It Measures:</b> 
+<p>MAPE expresses the error as a percentage of the actual values. This metric gives an intuitive percentage-based measure of the average error.</p>
+<b>How to Interpret:</b>
+<p> A lower MAPE value means the model's predictions are closer to the actual figures, signifying higher accuracy. Because it's a percentage, it's easy to understand intuitively—e.g., a MAPE of 5% means that, on average, the model's predictions are within 5% of the actual price.</p>
 </div>
 
      </div>
